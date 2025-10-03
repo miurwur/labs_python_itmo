@@ -1,11 +1,27 @@
 def diap(d1, d2):
+    '''
+    Создает список чисел в диапазоне от минимального до максимального из двух переданных чисел
+    d1 (int): Первое число диапазона.
+    d2 (int): Второе число диапазона.
+    Возвращает список целых чисел (massive) от min(d1, d2) до max(d1, d2) включительно.
+    '''
     massive = []
     for i in range(min(d1, d2), max(d1, d2) + 1):
         massive.append(i)
     return massive
 
 def guess_number(target, lst, type='seq'):
+    '''
+    Производит поиск числа в списке с помощью последовательного или бинарного поиска.
+    target (int): число, которое нужно найти.
+    lst: список чисел.
+    type (str): тип поиска.
+    'seq' - последовательный поиск,
+    'bin' - бинарный поиск
+    Возвращает: [найденное число или None, количество попыток поиска]
+    '''
     if type == 'bin':
+        ''' Бинарный поиск '''
         left, right = 0, len(lst) - 1
         guess = 0
         while left <= right:
@@ -18,9 +34,9 @@ def guess_number(target, lst, type='seq'):
                     left = mid + 1
                 else:
                     right = mid - 1
-        return [None, guess]  # Если не нашли
+        return [None, guess]
     else:
-        # Последовательный поиск
+        ''' Последовательный поиск '''
         guess = 0
         for i in range(len((lst))):
             if lst[i] == target:
