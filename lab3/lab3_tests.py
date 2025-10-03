@@ -6,6 +6,7 @@ class TestBinaryTree(unittest.TestCase):
     def test_height_two(self):
         ''' Тест 1: Стандартный вывод дерева высотой больше 1'''
         self.assertEqual(gen_bin_tree(2, 6), {'6': [{'18': []}, {'10': []}]})
+        self.assertEqual(gen_bin_tree(3, 6), {'6': [{'18': [{'54': []}, {'22': []}]}, {'10': [{'30': []}, {'14': []}]}]})
 
     def test_height_zero(self):
         ''' Тест 2: При высоте равной 0 возвращает None'''

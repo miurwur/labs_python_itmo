@@ -27,23 +27,23 @@ def guess_number(target, lst, type='seq'):
         while left <= right:
             mid = (right + left) // 2
             if lst[mid] == target:
-                return [lst[mid], guess]
+                return ["Ваше число: ",lst[mid], "Количество сравнений: ", guess]
             else:
                 guess += 1
                 if lst[mid] < target:
                     left = mid + 1
                 else:
                     right = mid - 1
-        return [None, guess]
+        return [None, "Количество сравнений: ", guess]
     else:
         ''' Последовательный поиск '''
         guess = 0
         for i in range(len((lst))):
             if lst[i] == target:
-                return [lst[i],guess]
+                return ["Ваше число: ",lst[i], "Количество сравнений: ",guess]
             else:
                 guess+=1
-        return [None, guess]
+        return [None, "Количество сравнений: ", guess]
 
 def main():
     target = int(input('Введите число: '))
@@ -55,5 +55,8 @@ def main():
     print('Результат последовательного поиска: ', result_seq)
     print('Результат бинарного поиска: ', result_bin)
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
+
+# print(guess_number(6, [1,2,3,4,5,6,7,8,9]))
+print(guess_number(1, [-15, -11, -7, -3, -2, 1], type = "bin"))
