@@ -33,4 +33,3 @@ def gen_bin_tree(height = 2, root = 6, l_b=left_branch, r_b=right_branch):
 
     return {str(root): [left_tree, right_tree]}
     ''' Возвращает дерево в виде словаря'''
-print(gen_bin_tree(3, 6))
