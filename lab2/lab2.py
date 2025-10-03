@@ -47,9 +47,7 @@ def guess_number(target, lst, type='seq'):
 
 def main():
     target = int(input('Введите число: '))
-    start_range = int(input('Введите начало диапазона: '))
-    end_range = int(input('Введите конец диапазона: '))
-    d = list(range(start_range, end_range + 1))
+    d = diap(int(input('Введите начало диапазона: ')), int(input('Введите конец диапазона: ')))
     result_seq = guess_number(target, d, type='seq')
     result_bin = guess_number(target, d, type='bin')
     print('Результат последовательного поиска: ', result_seq)
