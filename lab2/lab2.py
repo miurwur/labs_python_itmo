@@ -59,4 +59,4 @@ def main():
 #     main()
 
 # print(guess_number(6, [1,2,3,4,5,6,7,8,9]))
-print(guess_number(1, [-15, -11, -7, -3, -2, 1], type = "bin"))
+print(guess_number(1, (), type="bin"))

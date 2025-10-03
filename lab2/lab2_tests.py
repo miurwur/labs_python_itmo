@@ -3,13 +3,23 @@ import unittest
 
 class TestFunctions(unittest.TestCase):
 
-    # def test_height_two(self):
-    #     ''' Тест 1: Стандартный вывод дерева высотой больше 1'''
-    #     self.assertEqual(gen_bin_tree(2, 6), {'6': [{'18': []}, {'10': []}]})
-
     def test_bin(self):
-        self.assertEqual(guess_number(6, [1, 2, 3, 4, 5, 6, 7, 8, 9], type = "bin"), [6, 2])
-        self.assertEqual(guess_number(6, [1, 2, 3, 4, 5, 6, 7, 8, 9], type="bin"), [6, 2])
+        self.assertEqual(guess_number(6, [1, 2, 3, 4, 5, 6, 7, 8, 9], type = "bin"),
+                         ['Ваше число: ', 6, 'Количество сравнений: ', 2])
+        self.assertEqual(guess_number(5, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], type="bin"),
+                         ['Ваше число: ', 5, 'Количество сравнений: ', 0])
+
+    def test_seq(self):
+        self.assertEqual(guess_number(6, [1, 2, 3, 4, 5, 6, 7, 8, 9]),
+                         ['Ваше число: ', 6, 'Количество сравнений: ', 5])
+        self.assertEqual(guess_number(5, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
+                         ['Ваше число: ', 5, 'Количество сравнений: ', 4])
+
+    def test_no_elem(self):
+        self.assertEqual(guess_number(1, [2, 3, 4, 5, 6, 7, 8, 9, 10]),
+                         [None, 'Количество сравнений: ', 9])
+        self.assertEqual(guess_number(1, [2, 3, 4, 5, 6, 7, 8, 9, 10], type="bin"),
+                         [None, 'Количество сравнений: ', 3])
 
     # def test_diap(self):
     #     self.assertEqual(guess_number(1, 5), [1, 2, 3, 4, 5])
