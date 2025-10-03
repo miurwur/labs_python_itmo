@@ -55,8 +55,7 @@ def main():
     print('Результат последовательного поиска: ', result_seq)
     print('Результат бинарного поиска: ', result_bin)
 
-# if __name__ == '__main__':
-#     main()
 
-# print(guess_number(6, [1,2,3,4,5,6,7,8,9]))
-print(guess_number(1, (), type="bin"))
+if __name__ == '__main__':
+    main()
+
