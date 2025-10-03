@@ -25,12 +25,12 @@ class TestFunctions(unittest.TestCase):
                          [None, 'Количество сравнений: ', 3])
 
     def test_lst(self):
-        ''' Тест 4: Список длины = 1 без элемента '''
+        ''' Тест 4.1: Список длины = 1 без элемента '''
         self.assertEqual(guess_number(25, [1,1]),
                          [None, 'Количество сравнений: ', 2])
         self.assertEqual(guess_number(25, [1, 1], type="bin"),
                          [None, 'Количество сравнений: ', 2])
-        ''' Тест 4: Список длины = 1, содержащий элемент '''
+        ''' Тест 4.2: Список длины = 1, содержащий элемент '''
         self.assertEqual(guess_number(25, [25, 25]),
                          ['Ваше число: ', 25, 'Количество сравнений: ', 0])
         self.assertEqual(guess_number(25, [25,25], type="bin"),
