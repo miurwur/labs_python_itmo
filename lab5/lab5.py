@@ -1,5 +1,5 @@
-
-def gen_bin_tree(height = 2, root = 6, l_b=lambda x: x * 3, r_b=lambda y : y + 4):
+import collections
+def gen_bin_tree(height = 3, root = 6, l_b=lambda x: x * 3, r_b=lambda y : y + 4):
     '''
     Функция, создающая бинарное дерево
     height: высота дерева
@@ -14,8 +14,37 @@ def gen_bin_tree(height = 2, root = 6, l_b=lambda x: x * 3, r_b=lambda y : y + 4
         return {str(root): []}
     ''' Возвращает None если высота дерева 0 и корень если высота дерева 1'''
 
-    left_tree = gen_bin_tree(height - 1, l_b(root), l_b, r_b) if height > 1 else []
-    right_tree = gen_bin_tree(height - 1, r_b(root), l_b, r_b) if height > 1 else []
 
-    return {str(root): [left_tree, right_tree]}
+    root_base = {'value': root, 'left': None, 'right': None}
+
+    # очередь для обхода уровня
+    queue = collections.deque()
+    queue.append((root_base, 1))  # (узел, текущий уровень)
+
+    while queue:
+        current_root, level = queue.popleft() #распаковка кортежа
+        if level < height:
+            # левая ветка
+            left_base = l_b(current_root["value"]) #взяли корень и умножили на 3
+            left_root = {"value": left_base} #1 значение в левую ветку и база для следующих веток
+            current_root["left"] = left_root # занесли левую ветку в текущее дерево
+            queue.append([left_root, level + 1]) #переходим к следующему уровню
+            # правая ветка
+            right_base = r_b(current_root["value"])
+            right_root = {"value": right_base}
+            current_root["right"] = right_root
+            queue.append([right_root, level + 1])
+
+    return root_base
     ''' Возвращает дерево в виде словаря'''
+
+def main():
+    height = int(input('высота дерева: '))
+    root = int(input('корень дерева: '))
+    tree = gen_bin_tree(height, root)
+    print('ваше дерево: : ', tree)
+
+if __name__ == '__main__':
+    main()
+
+# print(gen_bin_tree())
