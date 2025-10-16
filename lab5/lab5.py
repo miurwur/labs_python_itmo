@@ -1,5 +1,5 @@
 import collections
-def gen_bin_tree(height = 3, root = 6, l_b=lambda x: x * 3, r_b=lambda y : y + 4):
+def gen_bin_tree(height = 2, root = 6, l_b=lambda x: x * 3, r_b=lambda y : y + 4):
     '''
     Функция, создающая бинарное дерево
     height: высота дерева
@@ -8,7 +8,13 @@ def gen_bin_tree(height = 3, root = 6, l_b=lambda x: x * 3, r_b=lambda y : y + 4
     r_b: функция для вычисления правого потомка
     '''
 
-    if height == 0:
+    if type(height) != int:
+        return "Введите целое число для высоты"
+    if type(root) != int and type(root) != float:
+        return "Введите числовое значение для корня"
+    '''' Возвращает запрос ввести правильный тип данных для высоты или корня'''
+
+    if height <= 0:
         return None
     if height == 1:
         return {str(root): []}
@@ -39,12 +45,8 @@ def gen_bin_tree(height = 3, root = 6, l_b=lambda x: x * 3, r_b=lambda y : y + 4
     ''' Возвращает дерево в виде словаря'''
 
 def main():
-    height = int(input('высота дерева: '))
-    root = int(input('корень дерева: '))
-    tree = gen_bin_tree(height, root)
+    tree = gen_bin_tree()
     print('ваше дерево: : ', tree)
 
 if __name__ == '__main__':
     main()
-
-# print(gen_bin_tree())  НАПИСАТЬ ДОКУМЕНТАЦИЮ
