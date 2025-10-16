@@ -15,12 +15,6 @@ def gen_bin_tree(height = 2, root = 6, l_b=left_branch, r_b=right_branch):
     r_b: функция для вычисления правого потомка (по умолчанию right_branch)
     '''
 
-    if type(height) != int:
-        return "Введите целое число для высоты"
-    if type(root) != int and type(root) != float :
-        return "Введите числовое значение для корня"
-    '''' Возвращает запрос ввести правильный тип данных для высоты или корня'''
-
     if height <= 0:
         return None
     if height == 1:
