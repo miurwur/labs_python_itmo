@@ -12,8 +12,9 @@
 
 Отчет лабораторная работа №6: https://github.com/miurwur/labs_python_itmo/blob/main/lab6/report6.md  
 
-Отчет лабораторная работа №7: 
+Отчет лабораторная работа №7: https://github.com/miurwur/labs_python_itmo/blob/main/lab7/report7.md  
 
 Лабораторная работа №8: https://github.com/miurwur/lab8.git
 
 Лабораторная работа №9: 
+
