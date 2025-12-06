@@ -1,18 +1,20 @@
-1) Графики без lru_cache
-<img width="477" height="335" alt="1" src="https://github.com/user-attachments/assets/fc39da10-ef3c-43b5-9626-5d65076eb3b0" />
+1) График без lru_cache  
+<img width="477" height="357" alt="1" src="https://github.com/user-attachments/assets/526632f0-04bf-4b5c-b31f-29a2c411bd59" />
+  
+
+2) Графики с lru_cache у итеративного факториала  
+<img width="474" height="353" alt="2" src="https://github.com/user-attachments/assets/563d875d-4e24-4dc4-a93f-4caf08aaf4a1" />
+  
 
 
-2) Графики без lru_cache
-<img width="490" height="337" alt="2" src="https://github.com/user-attachments/assets/de48ecac-09ce-4a69-b8e6-fb0c94f41f5b" />
+3) График с lru_cache у рекурсивного факториала  
+<img width="474" height="350" alt="3" src="https://github.com/user-attachments/assets/136ae550-d049-4b4a-a860-457e9b406c92" />
+  
 
 
-3) Подключение кэша к рекурсивному факториалу
-<img width="459" height="338" alt="3" src="https://github.com/user-attachments/assets/04d44265-072c-4e20-a7b5-062aa2582172" />
+4) Подключение кэша к обоим факториалам  
+<img width="477" height="342" alt="4" src="https://github.com/user-attachments/assets/2f89bcfd-f968-4ea5-bd15-0f65df1819ca" />
 
 
-4) Подключение кэша к обоим факториалам
-
-
-<img width="496" height="348" alt="5" src="https://github.com/user-attachments/assets/d445c62d-c317-4572-93ff-bdc6958bca7b" />
-
+  
 Подлючение кэша значительно уменьшает время, затраченное на вычисление факториала
