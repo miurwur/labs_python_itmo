@@ -7,9 +7,9 @@ import math
 
 
 def logger(func=None, *, handle=sys.stdout):
-    """
+    '''
     Параметризуемый декоратор для логирования выполнения функции.
-    """
+    '''
     if func is None:
         return lambda f: logger(f, handle=handle)
 
@@ -65,7 +65,7 @@ if not file_logger.handlers:
 
 @logger(handle=file_logger)
 def get_currencies(currency_codes: list, url="https://www.cbr-xml-daily.ru/daily_json.js") -> dict:
-    """
+    '''
     Получает курсы валют с API Центробанка России.
 
     Args:
@@ -74,7 +74,7 @@ def get_currencies(currency_codes: list, url="https://www.cbr-xml-daily.ru/daily
     Returns:
         dict: Словарь, где ключи - символьные коды валют, а значения - их курсы.
               Возвращает None в случае ошибки запроса.
-    """
+    '''
     if not isinstance(currency_codes, list):
         raise TypeError("currency_codes должен быть списком")
 

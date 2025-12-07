@@ -3,12 +3,11 @@ import json
 
 
 def get_currencies(currency_codes: list, url="https://www.cbr-xml-daily.ru/daily_json.js") -> dict:
-    """
+    '''
     Получает курсы валют с API Центробанка России.
-
     Args:
         currency_codes (list): Список символьных кодов валют.
-    """
+    '''
     if not isinstance(currency_codes, list):
         raise TypeError("currency_codes должен быть списком")
 
