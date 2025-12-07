@@ -56,7 +56,7 @@ def get_currencies(currency_codes: list, url: str = "https://www.cbr-xml-daily.r
     try:
         data = response.json()
     except json.JSONDecodeError:
-        raise ValueError("некорректным JSON")
+        raise ValueError("некорректный JSON")
 
     if "Valute" not in data:
         raise KeyError("В ответе API отсутствует ключ 'Valute'")
@@ -92,7 +92,7 @@ class TestCurrencyBusinessLogic(unittest.TestCase):
 
     @patch('requests.get')
     def test_get_currencies_success(self, mock_get):
-        """Проверка корректного возврата курсов"""
+        """Корректный возврат курсов валют"""
         mock_get.return_value.status_code = 200
         mock_get.return_value.json.return_value = self.mock_data
 
@@ -102,13 +102,13 @@ class TestCurrencyBusinessLogic(unittest.TestCase):
 
     @patch('requests.get', side_effect=requests.ConnectionError("Network Failed"))
     def test_get_currencies_connection_error(self, mock_get):
-        """Проверка выброса ConnectionError при ошибке сети"""
+        """ConnectionError при ошибке сети"""
         with self.assertRaisesRegex(ConnectionError, "API недоступен"):
             get_currencies(["USD"], url="mock_url")
 
     @patch('requests.get')
     def test_get_currencies_http_error(self, mock_get):
-        """Проверка выброса ConnectionError при HTTP-ошибке (например, 404)"""
+        """ConnectionError при HTTP-ошибке"""
         mock_get.return_value.status_code = 404
         mock_get.return_value.raise_for_status.side_effect = requests.HTTPError("404 Not Found")
         with self.assertRaisesRegex(ConnectionError, "API недоступен"):
@@ -116,15 +116,15 @@ class TestCurrencyBusinessLogic(unittest.TestCase):
 
     @patch('requests.get')
     def test_get_currencies_invalid_json(self, mock_get):
-        """Проверка выброса ValueError при некорректном JSON"""
+        """ValueError при некорректном JSON"""
         mock_get.return_value.status_code = 200
         mock_get.return_value.json.side_effect = json.JSONDecodeError("msg", "doc", 0)
-        with self.assertRaisesRegex(ValueError, "некорректным JSON"):
+        with self.assertRaisesRegex(ValueError, "некорректный JSON"):
             get_currencies(["USD"], url="mock_url")
 
     @patch('requests.get')
     def test_get_currencies_missing_valute_key(self, mock_get):
-        """Проверка выброса KeyError при отсутствии ключа 'Valute'"""
+        """KeyError при отсутствии ключа 'Valute'"""
         mock_get.return_value.status_code = 200
         mock_get.return_value.json.return_value = {"Date": "...", "OtherKey": {}}
         with self.assertRaisesRegex(KeyError, "отсутствует ключ 'Valute'"):
@@ -132,7 +132,7 @@ class TestCurrencyBusinessLogic(unittest.TestCase):
 
     @patch('requests.get')
     def test_get_currencies_missing_currency_code(self, mock_get):
-        """Проверка выброса KeyError при несуществующей валюте"""
+        """KeyError при несуществующей валюте"""
         mock_get.return_value.status_code = 200
         mock_get.return_value.json.return_value = self.mock_data
         with self.assertRaisesRegex(KeyError, "не найдена"):
@@ -140,10 +140,10 @@ class TestCurrencyBusinessLogic(unittest.TestCase):
 
     @patch('requests.get')
     def test_get_currencies_invalid_rate_type(self, mock_get):
-        """Проверка выброса TypeError если курс не число"""
+        """TypeError если курс не число"""
         mock_data_invalid = {
             "Valute": {
-                "USD": {"Value": "90.5", "Nominal": 1, "Name": "Доллар США"}  # Rate is string
+                "USD": {"Value": "90.5", "Nominal": 1, "Name": "Доллар США"}
             }
         }
         mock_get.return_value.status_code = 200
@@ -157,42 +157,37 @@ class TestLoggerDecorator(unittest.TestCase):
         self.stream = io.StringIO()
 
         @logger(handle=self.stream)
-        def success_func(x):
+        def multiply(x):
             return x * 2
 
         @logger(handle=self.stream)
-        def error_func(x):
+        def validate_positive(x):
             if x < 0:
-                raise ValueError("Value cannot be negative")
+                raise ValueError("Negative value not allowed")
             return x
 
-        self.success_func = success_func
-        self.error_func = error_func
+        self.multiply = multiply
+        self.validate_positive = validate_positive
 
     def test_logging_success_info(self):
-        """Проверка логов INFO при успешном выполнении"""
-        result = self.success_func(10)
+        """Логи INFO при успешном выполнении"""
+        result = self.multiply(10)
         logs = self.stream.getvalue()
 
-        self.assertIn("INFO: Started 'success_func'. args: (10,), kwargs: {}", logs)
-
-        self.assertIn("INFO: Finished 'success_func'. Result: 20", logs)
-
+        self.assertIn("INFO: Started 'multiply'. args: (10,), kwargs: {}", logs)
+        self.assertIn("INFO: Finished 'multiply'. Result: 20", logs)
         self.assertEqual(result, 20)
 
     def test_logging_error_and_rethrow(self):
-        """Проверка логов ERROR и проброса исключения"""
+        """Логи ERROR и проброс исключения"""
 
         with self.assertRaises(ValueError):
-            self.error_func(-5)
+            self.validate_positive(-5)
 
         logs = self.stream.getvalue()
-
-        self.assertIn("ERROR: Failed 'error_func'. Error: ValueError - Value cannot be negative", logs)
-
-        self.assertNotIn("Finished 'error_func'", logs)
-
-        self.assertIn("INFO: Started 'error_func'", logs)
+        self.assertIn("ERROR: Failed 'validate_positive'. Error: ValueError - Negative value not allowed", logs)
+        self.assertNotIn("Finished 'validate_positive'", logs)
+        self.assertIn("INFO: Started 'validate_positive'", logs)
 
     @patch('requests.get', side_effect=requests.ConnectionError("Mocked Connection Error"))
     def test_logging_error_with_currency_context(self, mock_get):
@@ -200,31 +195,30 @@ class TestLoggerDecorator(unittest.TestCase):
         self.stream.seek(0)
 
         @logger(handle=self.stream)
-        def wrapped_get_currencies():
-            return get_currencies(['USD'], url="https://invalid-url-address.com")
+        def get_usd():
+            return get_currencies(['USD'], url="https://invalid-url.com")
 
         with self.assertRaises(ConnectionError):
-            wrapped_get_currencies()
+            get_usd()
 
         logs = self.stream.getvalue()
-
         self.assertIn("ERROR", logs)
         self.assertIn("ConnectionError", logs)
-        self.assertIn("Failed 'wrapped_get_currencies'", logs)
+        self.assertIn("Failed 'get_usd'", logs)
 
     def test_logger_with_logging_obj(self):
-        """Проверка работы декоратора с logging.Logger"""
+        """Работа с logging.Logger"""
         mock_logger = MagicMock(spec=logging.Logger)
 
         @logger(handle=mock_logger)
-        def sum_two(a, b):
+        def add(a, b):
             return a + b
 
-        sum_two(1, 2)
+        add(1, 2)
 
-        self.assertTrue(mock_logger.info.called)
+        mock_logger.info.assert_called()
         self.assertEqual(mock_logger.info.call_count, 2)
-        self.assertFalse(mock_logger.error.called)
+        mock_logger.error.assert_not_called()
 
 
 if __name__ == "__main__":
