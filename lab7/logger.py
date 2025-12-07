@@ -123,7 +123,7 @@ def solve_quadratic(a, b, c):
     Решает квадратное уравнение, ошибки, перехватывает декоратором.
     """
     if not all(isinstance(x, (int, float)) for x in [a, b, c]):
-        raise TypeError("Все коэффициенты должны быть числами (a, b, c)")
+        raise TypeError("Все коэффициенты должны быть числами")
 
     if a == 0 and b == 0:
         raise ValueError("Уравнение не существует (a=0, b=0)")
