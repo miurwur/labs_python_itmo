@@ -20,8 +20,9 @@
 Лабораторная работа №9: https://github.com/miurwur/lab9/tree/master  
 Отчёт: https://github.com/miurwur/lab9/blob/master/report.md  
 
-Лабораторная работа №10: https://colab.research.google.com/drive/1GSYJdAxqrWp1idRrvepkQ-6KeoH48DYe#scrollTo=63phKiaTQcWt
+Лабораторная работа №10: https://colab.research.google.com/drive/1GSYJdAxqrWp1idRrvepkQ-6KeoH48DYe#scrollTo=63phKiaTQcWt  
 Отчёт: 
+
 
 
 
