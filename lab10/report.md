@@ -1,2 +1,14 @@
-10 лабораторная: https://colab.research.google.com/drive/1GSYJdAxqrWp1idRrvepkQ-6KeoH48DYe#scrollTo=63phKiaTQcWt  
-Отчёт:  
+**Отчет по лабораторной работе №10**  
+Студент: Барыкина Анна  
+Группа: P3122  
+
+### Лабораторная работа 10. Методы оптимизации вычисления кода с помощью потоков, процессов, Cython, отпускания GIL  
+## Цель работы  
+**Исследовать методы оптимизации вычисления кода, используя потоки, процессы, Cython и отключение GIL на основе сравнения времени вычисления функции численного интегрирования методом прямоугольников, реализованной на чистом Python.**    
+
+Базовая реализация:  
+```python
+def integrate(f: Callable[[float], float], a: float, b: float, *, n_iter: int = 100000) -> float:
+```
+Производительность:  
+<img width="410" height="169" alt="image" src="https://github.com/user-attachments/assets/6ebc936a-bd47-4d4f-9a4b-116954bbb814" />
